@@ -44,11 +44,19 @@ public class StockFeeder {
         if (!exists) {
             Logger.errorRegister(code);
         }
+
         List<StockViewer> viewerList = viewers.get(code);
         if (viewerList == null) {
             viewerList = new ArrayList<>();
             viewers.put(code, viewerList);
         }
+        for(StockViewer viewer : viewerList) {
+            if (viewer.getClass().equals(stockViewer.getClass())) {
+                Logger.errorRegister(code);
+            }
+        }
+
+        
         
         if (!viewerList.contains(stockViewer)) {
             viewerList.add(stockViewer);
